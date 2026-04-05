@@ -41,26 +41,54 @@ The doctor directory uses the following data schema:
 - **Area**: Location/area in Mumbai
 - **Notes**: Additional information (e.g., availability, languages spoken)
 
-## Google Sheets Integration (Coming Soon)
+## Google Sheets Integration
 
-The application is designed to fetch data from a Google Sheet, making it easy for non-technical users to update the directory. The Google Sheet should have the following columns:
+The application can fetch data directly from a published Google Sheet, making it easy for non-technical users to update the directory without touching code!
+
+### Quick Setup
+
+1. **Import the template**: Use `doctor-template.csv` to create your Google Sheet
+2. **Publish to web**: File > Share > Publish to web (as CSV)
+3. **Configure**: Paste the published URL in `src/config.js`
+4. **Deploy**: Run `npm run deploy` - Done!
+
+📖 **[Full Setup Instructions →](./GOOGLE_SHEETS_SETUP.md)**
+
+### Required Columns
+
+Your Google Sheet must have these columns (in any order):
 
 | Name | Specialization | Hospital/Clinic | Phone | Area | Notes |
 |------|----------------|-----------------|-------|------|-------|
+| Dr. Name | Cardiologist | Hospital Name | +91 XXXXX XXXXX | Bandra | Additional info |
+
+### Benefits
+
+- ✅ **No coding required** to update doctor information
+- ✅ **Instant updates** - changes reflect immediately on the website
+- ✅ **Easy collaboration** - share the sheet with your team
+- ✅ **Automatic fallback** to sample data if sheet fails to load
 
 ## Customization
 
-To customize for your community:
+To customize for your community, edit `src/config.js`:
 
-1. Update the header text in `src/App.jsx`
-2. Replace sample data in `src/data/sampleDoctors.js`
-3. Configure Google Sheets API integration (instructions coming soon)
+```javascript
+export const config = {
+  GOOGLE_SHEET_URL: 'your-published-sheet-url',
+  USE_SAMPLE_DATA: false,  // Set to true to use sample data
+  CITY_NAME: 'Mumbai',     // Change for your city
+  APP_TITLE: 'Doctor Referral Directory',
+  APP_SUBTITLE: 'Trusted doctor references from your community'
+};
+```
 
 ## Tech Stack
 
 - React 19
 - Vite 8
 - Tailwind CSS 4
+- PapaParse (CSV parsing)
 - GitHub Pages
 
 ## Contributing
